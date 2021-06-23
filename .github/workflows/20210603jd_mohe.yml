@@ -1,14 +1,14 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: 0421jd_health京东健康
+name: jd_mohe.js,
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: '10 0-23/4 * * *'
+    - cron: '0,29 0-23/4 * * *'
   repository_dispatch:
-    types: health
+    types: jd_mohe.js
 jobs:
   build:
 
@@ -32,11 +32,11 @@ jobs:
       - name: npm install
         run: |
           npm install
-      - name: '运行'
+      - name: 'jd_mohe.js'
         run: |
-          node jd_health.js 
+          #sleep 1
           
-          
+          node jd_mohe.js
         env:
           JD_COOKIE: ${{ secrets.JD_COOKIE }}
           JD_USER_AGENT: ${{ secrets.JD_USER_AGENT }}
@@ -51,4 +51,5 @@ jobs:
           DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
           DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
           IGOT_PUSH_KEY: ${{ secrets.IGOT_PUSH_KEY }}
+          QYWX_KEY: ${{ secrets.QYWX_KEY }}
 

@@ -1,14 +1,14 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: 0421jd_health京东健康
+name: 0607jd_star_shop
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: '10 0-23/4 * * *'
+    - cron: '20 1,10 * * * *'
   repository_dispatch:
-    types: health
+    types: jd_star_shop
 jobs:
   build:
 
@@ -17,7 +17,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
@@ -34,7 +33,7 @@ jobs:
           npm install
       - name: '运行'
         run: |
-          node jd_health.js 
+          node jd_star_shop.js
           
           
         env:
@@ -51,4 +50,6 @@ jobs:
           DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
           DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
           IGOT_PUSH_KEY: ${{ secrets.IGOT_PUSH_KEY }}
+          PUSH_PLUS_TOKEN: ${{ secrets.PUSH_PLUS_TOKEN }}
+          PUSH_PLUS_USER: ${{ secrets.PUSH_PLUS_USER }}
 
