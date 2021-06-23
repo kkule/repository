@@ -44,14 +44,14 @@ let cookiesArr = [], cookie = '', token;
          'kDunq': 'UUXpt',
          'pXMAk': '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取',
          'cxASV': 'https://bean.m.jd.com/bean/signIndex.action',
-         'dnDIo': 'https://raw.githubusercontent.com/1277002811/JDbot/master/shareCodes/cfd.json',
+         'dnDIo': 'https://gitee.com/xr2021/share/raw/master/cfd.json',
          'Fpxcy': function(_0x1a4075, _0x6202aa) {
              return _0x1a4075 <= _0x6202aa;
          },
          'LiXuS': function(_0x2fe291, _0x25e58b) {
              return _0x2fe291(_0x25e58b);
          },
-         'uOgiE': 'https://raw.githubusercontent.com/1277002811/JDbot/master/shareCodes/cfd.json',
+         'uOgiE': 'https://cdn.jsdelivr.net/gh/1277002811/JDbot@master/shareCodes/cfd1.json',
          'JOdZO': function(_0x5a1a09, _0x214ec3) {
              return _0x5a1a09(_0x214ec3);
          },
@@ -97,7 +97,7 @@ let cookiesArr = [], cookie = '', token;
      }
      let _0x3b6899 = {},
          _0x14c33c = await _0x5557a9['UDmWB'](getAuthorShareCode, _0x5557a9['dnDIo']);
-     if (_0x5557a9['Fpxcy'](new Date()['getHours'](), 0x3)) await _0x5557a9['UDmWB'](getAuthorShareCode, 'https://raw.githubusercontent.com/1277002811/JDbot/master/shareCodes/cfd.json');
+     if (_0x5557a9['Fpxcy'](new Date()['getHours'](), 0x3)) await _0x5557a9['UDmWB'](getAuthorShareCode, 'https://gitee.com/xr2021/share/raw/master/cfd.json');
      if (!_0x14c33c) _0x14c33c = await _0x5557a9['LiXuS'](getAuthorShareCode, _0x5557a9['uOgiE']);
      $['strMyShareIds'] = [..._0x3b6899 && _0x3b6899['shareId'] || [], ..._0x14c33c && _0x14c33c['shareId'] || []];
      $['strGroupIds'] = [..._0x3b6899 && _0x3b6899['strGroupIds'] || [], ..._0x14c33c && _0x14c33c['strGroupIds'] || []];
