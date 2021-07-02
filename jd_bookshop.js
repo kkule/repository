@@ -1,22 +1,24 @@
 /*
 口袋书店
+更新时间：2021-06-26 
+加了一个码,修复需要手动打开的问题
 活动入口：京东app首页-京东图书-右侧口袋书店
 已支持IOS双京东账号,Node.js支持N个京东账号
-脚本兼容:QuantumultX,Surge,Loon,JSBox,Node.js
+脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 ============Quantumultx===============
 [task_local]
 #口袋书店
-1 8,12,18 * * * https://gitee.com/lxk0301/jd_scripts/raw/master/jd_bookshop.js, tag=口袋书店, img-url=https://raw.githubusercontent.com/Orz-3/task/master/jd.png, enabled=true
+1 8,12,18 * * *  https://raw.githubusercontent.com/Wenmoux/scripts/wen/jd/chinnkarahoi_jd_bookshop.js, tag=口袋书店, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 
 ================Loon==============
 [Script]
-cron "1 8,12,18 * * *" script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_bookshop.js,tag=口袋书店
+cron "1 8,12,18 * * *" script-path= https://raw.githubusercontent.com/Wenmoux/scripts/wen/jd/chinnkarahoi_jd_bookshop.js,tag=口袋书店
 
 ===============Surge=================
-口袋书店 = type=cron,cronexp="1 8,12,18 * * *",wake-system=1,timeout=3600,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_bookshop.js
+口袋书店 = type=cron,cronexp="1 8,12,18 * * *",wake-system=1,timeout=3600,script-path= https://raw.githubusercontent.com/Wenmoux/scripts/wen/jd/chinnkarahoi_jd_bookshop.js
 
 ============小火箭=========
-口袋书店 = type=cron,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_bookshop.js, cronexpr="1 8,12,18* * *", timeout=3600, enable=true
+口袋书店 = type=cron,script-path= https://raw.githubusercontent.com/Wenmoux/scripts/wen/jd/chinnkarahoi_jd_bookshop.js, cronexpr="1 8,12,18* * *", timeout=3600, enable=true
  */
 const $ = new Env('口袋书店');
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -29,10 +31,7 @@ let ADD_CART = false
 ADD_CART = $.isNode() ? (process.env.PURCHASE_SHOPS ? process.env.PURCHASE_SHOPS : ADD_CART) : ($.getdata("ADD_CART") ? $.getdata("ADD_CART") : ADD_CART);
 // 加入购物车开关，与东东小窝共享
 
-let inviteCodes = [
-'7ead799c8fdf4396b41af83e53aafd23@b44ed5c2c6d24cca91578a0287f7b8f0@47ee54da86fa4e22929990ba95418627@de81fc39c11c42919d23a17f3defc277@4e8a8e33bf5f442fbcde4194c2293bd5@b44ed5c2c6d24cca91578a0287f7b8f0@47ee54da86fa4e22929990ba95418627@de81fc39c11c42919d23a17f3defc277@4e8a8e33bf5f442fbcde4194c2293bd5','b44ed5c2c6d24cca91578a0287f7b8f0@47ee54da86fa4e22929990ba95418627@de81fc39c11c42919d23a17f3defc277@4e8a8e33bf5f442fbcde4194c2293bd5@b44ed5c2c6d24cca91578a0287f7b8f0@47ee54da86fa4e22929990ba95418627@de81fc39c11c42919d23a17f3defc277@4e8a8e33bf5f442fbcde4194c2293bd5', 'b44ed5c2c6d24cca91578a0287f7b8f0@47ee54da86fa4e22929990ba95418627@de81fc39c11c42919d23a17f3defc277@4e8a8e33bf5f442fbcde4194c2293bd5@b44ed5c2c6d24cca91578a0287f7b8f0@47ee54da86fa4e22929990ba95418627@de81fc39c11c42919d23a17f3defc277@4e8a8e33bf5f442fbcde4194c2293bd5','b44ed5c2c6d24cca91578a0287f7b8f0@47ee54da86fa4e22929990ba95418627@de81fc39c11c42919d23a17f3defc277@4e8a8e33bf5f442fbcde4194c2293bd5@b44ed5c2c6d24cca91578a0287f7b8f0@47ee54da86fa4e22929990ba95418627@de81fc39c11c42919d23a17f3defc277@4e8a8e33bf5f442fbcde4194c2293bd5','b44ed5c2c6d24cca91578a0287f7b8f0@47ee54da86fa4e22929990ba95418627@de81fc39c11c42919d23a17f3defc277@4e8a8e33bf5f442fbcde4194c2293bd5@b44ed5c2c6d24cca91578a0287f7b8f0@47ee54da86fa4e22929990ba95418627@de81fc39c11c42919d23a17f3defc277@4e8a8e33bf5f442fbcde4194c2293bd5','b44ed5c2c6d24cca91578a0287f7b8f0@47ee54da86fa4e22929990ba95418627@de81fc39c11c42919d23a17f3defc277@4e8a8e33bf5f442fbcde4194c2293bd5@b44ed5c2c6d24cca91578a0287f7b8f0@47ee54da86fa4e22929990ba95418627@de81fc39c11c42919d23a17f3defc277@4e8a8e33bf5f442fbcde4194c2293bd5','b44ed5c2c6d24cca91578a0287f7b8f0@47ee54da86fa4e22929990ba95418627@de81fc39c11c42919d23a17f3defc277@4e8a8e33bf5f442fbcde4194c2293bd5@b44ed5c2c6d24cca91578a0287f7b8f0@47ee54da86fa4e22929990ba95418627@de81fc39c11c42919d23a17f3defc277@4e8a8e33bf5f442fbcde4194c2293bd5', 'b44ed5c2c6d24cca91578a0287f7b8f0@47ee54da86fa4e22929990ba95418627@de81fc39c11c42919d23a17f3defc277@4e8a8e33bf5f442fbcde4194c2293bd5@b44ed5c2c6d24cca91578a0287f7b8f0@47ee54da86fa4e22929990ba95418627@de81fc39c11c42919d23a17f3defc277@4e8a8e33bf5f442fbcde4194c2293bd5',
-'7ead799c8fdf4396b41af83e53aafd23@47ee54da86fa4e22929990ba95418627@7ead799c8fdf4396b41af83e53aafd23@de81fc39c11c42919d23a17f3defc277@4e8a8e33bf5f442fbcde4194c2293bd5@b44ed5c2c6d24cca91578a0287f7b8f0@47ee54da86fa4e22929990ba95418627@de81fc39c11c42919d23a17f3defc277@4e8a8e33bf5f442fbcde4194c2293bd5'
-]
+let inviteCodes = [  '7ead799c8fdf4396b41af83e53aafd23@b44ed5c2c6d24cca91578a0287f7b8f0@47ee54da86fa4e22929990ba95418627@de81fc39c11c42919d23a17f3defc277@4e8a8e33bf5f442fbcde4194c2293bd5@b44ed5c2c6d24cca91578a0287f7b8f0@47ee54da86fa4e22929990ba95418627@de81fc39c11c42919d23a17f3defc277@4e8a8e33bf5f442fbcde4194c2293bd5', '7ead799c8fdf4396b41af83e53aafd23@b44ed5c2c6d24cca91578a0287f7b8f0@47ee54da86fa4e22929990ba95418627@de81fc39c11c42919d23a17f3defc277@4e8a8e33bf5f442fbcde4194c2293bd5@b44ed5c2c6d24cca91578a0287f7b8f0@47ee54da86fa4e22929990ba95418627@de81fc39c11c42919d23a17f3defc277@4e8a8e33bf5f442fbcde4194c2293bd5']
 
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
@@ -41,13 +40,7 @@ if ($.isNode()) {
   if (process.env.JD_DEBUG && process.env.JD_DEBUG === 'false') console.log = () => {
   };
 } else {
-  let cookiesData = $.getdata('CookiesJD') || "[]";
-  cookiesData = jsonParse(cookiesData);
-  cookiesArr = cookiesData.map(item => item.cookie);
-  cookiesArr.reverse();
-  cookiesArr.push(...[$.getdata('CookieJD2'), $.getdata('CookieJD')]);
-  cookiesArr.reverse();
-  cookiesArr = cookiesArr.filter(item => item !== "" && item !== null && item !== undefined);
+  cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
 }
 
 !(async () => {
@@ -60,11 +53,12 @@ if ($.isNode()) {
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
-      $.UserName = decodeURIComponent(cookie.match(/pt_pin=(.+?);/) && cookie.match(/pt_pin=(.+?);/)[1])
+      $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
       $.index = i + 1;
       $.isLogin = true;
       $.nickName = '';
       message = '';
+      $.exit = false;
       await TotalBean();
       console.log(`\n******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
       if (!$.isLogin) {
@@ -93,6 +87,7 @@ async function jdBeauty() {
   await getActCk()
   await getActInfo()
   await getToken()
+  await accessLogWithAD()
   await getUserInfo()
   await getActContent(false, shareUuid)
   if ($.exit) return
@@ -269,7 +264,35 @@ function getUserInfo() {
     })
   })
 }
-
+// 获得用户信息
+function accessLogWithAD() {
+  return new Promise(resolve => {
+    let body = `venderId=${ $.shopId}&code=99&pin=${encodeURIComponent($.token)}&activityId=${ACT_ID}&pageUrl=https%3A%2F%2Flzdz-isv.isvjcloud.com%2Fdingzhi%2Fbook%2Fdevelop%2Factivity%3FactivityId%3Ddz2010100034444201%26lng%3D107.146945%26lat%3D33.255267%26sid%3Dcad74d1c843bd47422ae20cadf6fe5aw%26un_area%3D27_2442_2444_31912&subType=app&adSource=`
+    $.post(taskPostUrl('common/accessLogWithAD', body), async (err, resp, data) => {
+      try {
+        if (err) {
+          console.log(`${$.name} API请求失败，请检查网路重试`)
+        } else {
+    //      if (safeGet(data)) {
+          if($.isNode())
+            for (let ck of resp['headers']['set-cookie']) {
+              cookie = `${cookie}; ${ck.split(";")[0]};`
+            }
+          else{
+            for (let ck of resp['headers']['Set-Cookie'].split(',')) {
+              cookie = `${cookie}; ${ck.split(";")[0]};`
+            }
+          }
+       //   }
+        }
+      } catch (e) {
+        $.logErr(e, resp)
+      } finally {
+        resolve(data);
+      }
+    })
+  })
+}
 // 获得游戏信息
 function getActContent(info = false, shareUuid = '') {
   return new Promise(resolve => {
@@ -279,6 +302,7 @@ function getActContent(info = false, shareUuid = '') {
         if (err) {
           console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
+   //     console.log(data)
           if (data && safeGet(data)) {
             data = JSON.parse(data);
             if (data.data) {
@@ -286,10 +310,12 @@ function getActContent(info = false, shareUuid = '') {
               if (!$.userInfo.bookStore) {
                 $.exit = true
                 console.log(`京东账号${$.index}尚未开启口袋书店，请手动开启`)
+                console.log('\n提示：从五月份开始，需要手动进入一下活动页面。不然即使是开启了这个活动。跑脚本也提示未开启活动\n')
                 return
               }
               $.actorUuid = $.userInfo.actorUuid
-              if(!info) console.log(`您的好友助力码为${$.actorUuid}`)
+              // if(!info) console.log(`您的好友助力码为${$.actorUuid}`)
+              if(!info) console.log(`\n【京东账号${$.index}（${$.UserName}）的${$.name}好友互助码】${$.actorUuid}\n`);
               $.gold = $.userInfo.bookStore.hasStoreGold
               if (!info) {
                 const tasks = data.data.settingVo
@@ -557,8 +583,10 @@ function chargeGold() {
 
 function showMsg() {
   return new Promise(resolve => {
-    message += `本次运行获得积分${$.score}`;
-    $.msg($.name, '', `京东账号${$.index}${$.nickName}\n${message}`);
+    if ($.score) {
+      message += `本次运行获得积分${$.score}`;
+      $.msg($.name, '', `京东账号${$.index}${$.nickName}\n${message}`);
+    }
     resolve()
   })
 }
@@ -624,7 +652,7 @@ function TotalBean() {
         "Connection": "keep-alive",
         "Cookie": cookie,
         "Referer": "https://wqs.jd.com/my/jingdou/my.shtml?sceneval=2",
-        "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.2.2;14.2;%E4%BA%AC%E4%B8%9C/9.2.2 CFNetwork/1206 Darwin/20.1.0")
+        "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1")
       }
     }
     $.post(options, (err, resp, data) => {
