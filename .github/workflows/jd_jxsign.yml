@@ -1,14 +1,14 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: 0520jay_freshgoods
+name: jd_jxsign
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: '20 1,7 21-27 5 *'
+    - cron: '20 1,7 * * *'
   repository_dispatch:
-    types: jay_freshgoods
+    types: jd_jxsign
 jobs:
   build:
 
@@ -32,11 +32,11 @@ jobs:
       - name: npm install
         run: |
           npm install
-      - name: 'jay_freshgoods'
+      - name: 'jd_jxsign'
         run: |
           #sleep 1
           
-          node jay_freshgoods.js
+          node jd_jxsign.js
         env:
           JD_COOKIE: ${{ secrets.JD_COOKIE }}
           JD_USER_AGENT: ${{ secrets.JD_USER_AGENT }}
