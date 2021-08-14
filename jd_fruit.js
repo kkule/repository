@@ -1256,6 +1256,7 @@ function shareCodesFormat() {
   return new Promise(async resolve => {
     // console.log(`第${$.index}个京东账号的助力码:::${jdFruitShareArr[$.index - 1]}`)
     newShareCodes = [];
+	readShareCodeRes = [];
     if (jdFruitShareArr[$.index - 1]) {
       newShareCodes = jdFruitShareArr[$.index - 1].split('@');
     } else {
@@ -1264,8 +1265,8 @@ function shareCodesFormat() {
       newShareCodes = shareCodes[tempIndex].split('@');
     }
 	if (new Date().getUTCHours() + 8 >= 12) {
-    const readShareCodeRes = await readShareCode();    
-    } else {const readShareCodeRes = [];
+    readShareCodeRes = await readShareCode();
+    } else {readShareCodeRes = [];
 	}
     
     if (readShareCodeRes && readShareCodeRes.code === 200) {
