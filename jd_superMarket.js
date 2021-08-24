@@ -1528,7 +1528,7 @@ function TotalBean() {
 function getTeam() {
   return new Promise(async resolve => {
     $.getTeams = [];
-    $.get({url: `http://jd.turinglabs.net/api/v2/jd/supermarket/read/100000/`, timeout: 100000}, (err, resp, data) => {
+    $.get({url: `http://jd.turinglabs.net/api/v2/jd/s111upermarket/read/100000/`, timeout: 100000}, (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
@@ -1584,11 +1584,11 @@ async function helpAuthor() {
   await bigWinner();
 }
 async function barGain() {
-  let res = await getAuthorShareCode2('https://raw.githubusercontent.com/Aaron-lv/updateTeam/master/shareCodes/jd_barGain.json')
+  let res = await getAuthorShareCode2('https://xr2021.coding.net/p/import-kasd/d/JDbot/git/raw/master/shareCodes/jd_barGain.json')
   if (!res) {
-    $.http.get({url: 'https://purge.jsdelivr.net/gh/Aaron-lv/updateTeam@master/shareCodes/jd_barGain.json'}).then((resp) => {}).catch((e) => $.log('刷新CDN异常', e));
+    $.http.get({url: 'https://xr2021.coding.net/p/import-kasd/d/JDbot/git/raw/master/shareCodes/jd_barGain.json'}).then((resp) => {}).catch((e) => $.log('刷新CDN异常', e));
     await $.wait(1000)
-    res = await getAuthorShareCode2('https://cdn.jsdelivr.net/gh/Aaron-lv/updateTeam@master/shareCodes/jd_barGain.json')
+    res = await getAuthorShareCode2('https://xr2021.coding.net/p/import-kasd/d/JDbot/git/raw/master/shareCodes/jd_barGain.json')
   }
   $.inBargaining = [...(res && res['inBargaining'] || [])]
   $.inBargaining = getRandomArrayElements($.inBargaining, $.inBargaining.length > 3 ? 6 : $.inBargaining.length);
@@ -1615,11 +1615,11 @@ async function barGain() {
 }
 
 async function bigWinner() {
-  let res = await getAuthorShareCode2('https://raw.githubusercontent.com/1994112/updateTeam1/master/shareCodes/bigWinner.json')
+  let res = await getAuthorShareCode2('https://xr2021.coding.net/p/import-kasd/d/JDbot/git/raw/master/shareCodes/bigWinner.json')
   if (!res) {
-    $.http.get({url: 'https://purge.jsdelivr.net/gh/1994112/updateTeam1@master/shareCodes/bigWinner.json'}).then((resp) => {}).catch((e) => $.log('刷新CDN异常', e));
+    $.http.get({url: 'https://xr2021.coding.net/p/import-kasd/d/JDbot/git/raw/master/shareCodes/bigWinner.json'}).then((resp) => {}).catch((e) => $.log('刷新CDN异常', e));
     await $.wait(1000)
-    res = await getAuthorShareCode2('https://cdn.jsdelivr.net/gh/1994112/updateTeam1@master/shareCodes/bigWinner.json')
+    res = await getAuthorShareCode2('https://xr2021.coding.net/p/import-kasd/d/JDbot/git/raw/master/shareCodes/bigWinner.json')
   }
   $.codeList = getRandomArrayElements([...(res || [])], [...(res || [])].length);
   for (let vo of $.codeList) {
