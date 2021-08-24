@@ -127,7 +127,7 @@ async function sign() {
         "kernelPlatform": "RN",
         "activityId": "8a8fabf3cccb417f8e691b6774938bc2",
         "noWaitPrize": "false",
-		"inviterId":"yeldd0yXBiey7jio6se87g=="
+		"inviterId":"JopcpUKksgN1WQ0%2BqxXAFw%3D%3D"
       }),
       async (err, resp, data) => {
         try {
