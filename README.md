@@ -1,4 +1,5 @@
-不要用action跑， 否则github封号，
+尽量不要用action跑， 否则github封号，如需要github action运行,请注册帐户后先复制或导入其它项目,等一周后再复制本脚本.
+
 低调使用，不要fork！尽量第一时间同步更新脚本。防止失联请收藏gitee备份地址：https://gitee.com/xr2021/jdsign
 复制仓库后可以用github action 运行 
 
