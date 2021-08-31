@@ -1,5 +1,6 @@
 /*
 特物Z|万物皆可国创
+Opencardtw是否开卡,默认关
 抄自 @yangtingxiao 抽奖机脚本
 活动入口：
 更新地址：https://raw.githubusercontent.com/Wenmoux/scripts/master/jd/jd_superBrand.js
