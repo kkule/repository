@@ -90,7 +90,7 @@ const BASE_URL = 'https://m.jingxi.com/cubeactive/steprewardv3'
       }
       $.max = false;
       await enrollFriend($.packetIdArr[j].strUserPin);
-      await $.wait(5000);
+      await $.wait(15000);
       if ($.max) {
         $.packetIdArr.splice(j, 1)
         j--
